@@ -8,6 +8,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from report_final import bootstrap_difference
 from experiment import ROOT
+from integrity import verify_files
 
 
 class BootstrapTests(unittest.TestCase):
@@ -57,8 +58,7 @@ class FinalArtifactTests(unittest.TestCase):
             )
         lock_path = ROOT / "config/final_lock.json"
         lock = json.loads(lock_path.read_text())
-        for name, digest in lock["hashes"].items():
-            self.assertEqual(hashlib.sha256((ROOT / name).read_bytes()).hexdigest(), digest, name)
+        verify_files(lock["hashes"])
         run = json.loads((ROOT / "results/test/run.json").read_text())
         self.assertEqual(run["lock_sha256"], hashlib.sha256(lock_path.read_bytes()).hexdigest())
 

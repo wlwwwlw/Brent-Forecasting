@@ -8,6 +8,28 @@ const output = path.join(root, 'data', 'recheck');
 const digest = data => crypto.createHash('sha256').update(data).digest('hex');
 
 async function main() {
+  if (process.argv.includes('--full-h1')) {
+    const raw = path.join(root, 'data', 'raw');
+    fs.mkdirSync(raw, { recursive: true });
+    const config = {instrument:'brentcmdusd',dates:{from:'2025-10-28',to:'2026-10-28'},
+      timeframe:'h1',priceType:'bid',format:'json',ignoreFlats:false,volumes:true,
+      utcOffset:0,retryCount:3,failAfterRetryCount:true,batchSize:10,pauseBetweenBatchesMs:1000};
+    const candles = await getHistoricalRates(config);
+    if (!candles.length) throw Error('Empty hourly archive');
+    const payload = JSON.stringify(candles);
+    const file = path.join(raw, 'brent_h1_bid_2025-10-28_2026-10-28.json');
+    if (fs.existsSync(file) && digest(fs.readFileSync(file)) !== digest(payload)) {
+      throw Error('Hourly source changed; existing snapshot retained');
+    }
+    fs.writeFileSync(file, payload);
+    fs.writeFileSync(path.join(raw, 'h1_metadata.json'), JSON.stringify({
+      retrieved_at_utc:new Date().toISOString(),downloader:'dukascopy-node@1.51.1',
+      config,rows:candles.length,sha256:digest(payload),
+      timestamp:'UTC start of each hourly candle; end is timestamp + 1 hour'
+    }, null, 2));
+    console.log(`Downloaded complete H1 archive: ${candles.length} rows`);
+    return;
+  }
   fs.mkdirSync(output, { recursive: true });
   const config = {instrument:'brentcmdusd',dates:{from:'2025-10-28',to:'2026-10-28'},
     timeframe:'d1',priceType:'bid',format:'json',ignoreFlats:false,volumes:true,

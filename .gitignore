@@ -9,3 +9,4 @@ data/recheck/
 .vscode/
 .pytest_cache/
 .env
+work/

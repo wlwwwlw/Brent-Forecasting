@@ -1,5 +1,5 @@
 {
-  "audited_at_utc": "2026-11-04T23:57:40.076840+00:00",
+  "audited_at_utc": "2026-11-05T01:31:13.407539+00:00",
   "status": "passed",
   "predictions": [
     {
@@ -38,6 +38,26 @@
   "lock_hashes_verified": 15,
   "test_reselected": false,
   "original_artifact_hashes_verified": 44,
+  "full_h1_review": {
+    "status": "passed",
+    "hourly_rows": 8580,
+    "active_hourly_rows": 5393,
+    "missing_calendar_hours": 180,
+    "missing_inside_observed_session": 0,
+    "daily_rows": 365,
+    "active_sessions": 258,
+    "inactive_dates": 107,
+    "shortened_sessions": 9,
+    "mismatched_dates": 0,
+    "max_absolute_OHLC_difference": 0.0,
+    "assignment_time": "2026-10-28T00:00:00+03:00",
+    "cutoff_utc": "2026-10-27T21:00:00+00:00",
+    "last_active_hour_end_utc": "2026-10-27T21:00:00+00:00",
+    "prices_formed_after_cutoff": 0,
+    "D1_is_primary": true,
+    "model_data_changed": false,
+    "limitation": "Same supplier. Missing hours outside the observed session are listed, not filled."
+  },
   "limitations": [
     "Same supplier cross-frequency validation; no independent price feed.",
     "Diagnostic analysis after test; not new independent evidence."

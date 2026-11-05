@@ -1,0 +1,11 @@
+* text=auto eol=lf whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# Preserve the byte checksums of the original experiment.
+data/** -text
+config/** -text
+results/** -text
+provenance/** -text
+src/experiment.py -text
+src/statistical_models.py -text
+src/ml_models.py -text
+src/neural_models.py -text

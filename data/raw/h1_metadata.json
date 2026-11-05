@@ -1,0 +1,36 @@
+{
+  "retrieved_at_utc": "2026-11-05T01:18:59.613Z",
+  "downloader": "dukascopy-node@1.51.1",
+  "config": {
+    "instrument": "brentcmdusd",
+    "dates": {
+      "from": "2025-10-28T00:00:00.000Z",
+      "to": "2026-10-28T00:00:00.000Z"
+    },
+    "timeframe": "h1",
+    "priceType": "bid",
+    "format": "json",
+    "ignoreFlats": false,
+    "volumes": true,
+    "utcOffset": 0,
+    "retryCount": 3,
+    "failAfterRetryCount": true,
+    "batchSize": 10,
+    "pauseBetweenBatchesMs": 1000,
+    "volumeUnits": "millions",
+    "requestIntervalMs": 0,
+    "rateLimitRetryCount": 3,
+    "useCache": false,
+    "cacheFolderPath": "",
+    "retryOnEmpty": false,
+    "pauseBetweenRetriesMs": 500,
+    "wafMode": "auto",
+    "chromePath": "",
+    "wafTimeoutMs": 60000,
+    "wafTokenCache": true,
+    "wafTokenCachePath": ""
+  },
+  "rows": 8580,
+  "sha256": "9f73c8f9e1118b820a444b90c64740f50f66392ada627159b954ccce209b22d4",
+  "timestamp": "UTC start of each hourly candle; end is timestamp + 1 hour"
+}

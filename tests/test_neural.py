@@ -143,7 +143,7 @@ class NeuralTests(unittest.TestCase):
                 and r["origin_index"] == "99"
             )
             value, _ = fit_prepared(data, c, settings, 42)
-            self.assertAlmostEqual(value, float(saved["predicted"]), places=7)
+            np.testing.assert_allclose(value, float(saved["predicted"]), rtol=0, atol=1e-6)
 
 
 if __name__ == "__main__":

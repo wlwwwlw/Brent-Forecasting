@@ -21,7 +21,6 @@ def read(name):
 def main():
     out = ROOT / "results/validation"
     rows = read("neural_metrics.csv")
-    seeds = read("neural_seed_metrics.csv")
     base = read("baseline_metrics.csv")
     stats = read("statistical_metrics.csv")
     ml = read("ml_metrics.csv")
@@ -106,51 +105,6 @@ def main():
                     )
                 )
     write_csv(out / "neural_runtime.csv", timings)
-    lines = [
-        "# Нейросети: результаты валидации",
-        "",
-        "Пять архитектур, три фиксированных seed, два горизонта. Среднее и SD ниже рассчитаны по метрикам трёх отдельных запусков, а не по ансамблевому прогнозу. SD seed не является доверительным интервалом по будущим датам. Финальный тест не использован.",
-        "",
-        "| Горизонт | Архитектура | RMSE среднее | SD seed | MAE среднее | sMAPE среднее, % | Направление среднее, % | Выигрыш RMSE к naive, % |",
-        "|---|---|---:|---:|---:|---:|---:|---:|",
-    ]
-    for r in table:
-        lines.append(
-            f"| {r['horizon']} | {r['architecture'].upper()} | {r['RMSE_mean']:.4f} | {r['RMSE_seed_sd']:.4f} | {r['MAE_mean']:.4f} | {r['sMAPE_pct_mean']:.3f} | {r['direction_accuracy_pct_mean']:.2f} | {r['gain_vs_naive_pct']:.3f} |"
-        )
-    lines += [
-        "",
-        "## Выбранная архитектура и её отдельные seed",
-        "",
-        "| Горизонт | Архитектура | Seed | RMSE | MAE |",
-        "|---|---|---|---:|---:|",
-    ]
-    for h, c in run["winners"].items():
-        for r in seeds:
-            if r["horizon"] == h and r["candidate"] == c and r["fold"] == "all":
-                lines.append(
-                    f"| {h} | {c} | {r['seed']} | {float(r['RMSE']):.4f} | {float(r['MAE']):.4f} |"
-                )
-    lines += [
-        "",
-        "## Устойчивость по времени",
-        "",
-        "| Горизонт | Блок | RMSE naive | RMSE победителя, среднее seed | Выигрыш, % |",
-        "|---|---|---:|---:|---:|",
-    ]
-    for h, c in run["winners"].items():
-        for fold in ["v1", "v2", "v3"]:
-            n = next(
-                r
-                for r in base
-                if r["candidate"] == "naive" and r["horizon"] == h and r["fold"] == fold
-            )
-            r = next(
-                r for r in rows if r["candidate"] == c and r["horizon"] == h and r["fold"] == fold
-            )
-            lines.append(
-                f"| {h} | {fold} | {float(n['RMSE']):.4f} | {float(r['RMSE_mean']):.4f} | {100 * (1 - float(r['RMSE_mean']) / float(n['RMSE'])):.3f} |"
-            )
     comparison = []
     for h, c in run["winners"].items():
         for label, data, candidate in [
@@ -187,32 +141,6 @@ def main():
             )
         )
     write_csv(out / "family_validation_summary.csv", comparison)
-    lines += [
-        "",
-        "## Ограничения выводов",
-        "",
-        "- Отбор архитектуры выполняется по среднему RMSE трёх seed. Самый удачный seed не выбирается для презентации как представитель семейства.",
-        "- Валидационные оценки использованы для выбора, поэтому ещё не доказывают качество на независимом периоде.",
-        "- Фиксированные 60 эпох не гарантируют одинаковой сходимости или глобального минимума разных архитектур. Одна небольшая конфигурация не представляет весь класс нейросетей.",
-        "- Снижение training loss не означает улучшения будущего прогноза. Сравнивать нужно сохранённые внеобучающие ошибки.",
-        "- У ML и нейросетей различается представление входа, у статистических методов также отличается способ многопрогнозного расчёта. Сравниваются полные процедуры, а не изолированные архитектуры.",
-        "",
-        "## Вычисления",
-        "",
-        f"Успешных обучений: {run['successful_fits']}. Сбоев: {run['failed_fits']}. Сумма времени fit+forecast: {run['total_fit_seconds']:.2f} секунд. Затраты одного seed и всего исследования приведены отдельно в neural_runtime.csv.",
-        "",
-    ]
-    for c in sorted(set(r["candidate"] for r in good)):
-        sub = [r for r in good if r["candidate"] == c]
-        increased = sum(
-            r["diagnostics"]["final_train_mse_standardized"]
-            > r["diagnostics"]["initial_train_mse_standardized"]
-            for r in sub
-        )
-        lines.append(
-            f"- {c}: {sub[0]['diagnostics']['parameter_count']} параметров; рост конечного training loss относительно начального в {increased}/{len(sub)} обучениях."
-        )
-    (ROOT / "docs/neural_results.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("Saved neural and family validation summaries, diagnostics and figure.")
     for r in comparison:
         print(r)

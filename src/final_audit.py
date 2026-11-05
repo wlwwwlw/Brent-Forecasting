@@ -1,6 +1,5 @@
 """Recalculate artifacts and diagnostics without fitting or selecting new models."""
 
-import hashlib
 import json
 from datetime import datetime, timezone
 
@@ -13,6 +12,8 @@ import pandas as pd
 
 from checkpoint import effective_entries
 from experiment import ROOT, metrics
+from integrity import verify_files
+from prepare_data import review
 
 OUT = ROOT / "results/audit"
 FIG = ROOT / "results/figures"
@@ -381,11 +382,9 @@ def main():
     checks = verify_predictions(data.close.to_numpy(), data.timestamp_utc.str[:10].to_numpy())
     training = verify_training(data.close.to_numpy())
     lock = read_json("config/final_lock.json")
-    for filename, digest in lock["hashes"].items():
-        assert hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest, filename
+    verify_files(lock["hashes"])
     original = read_json("provenance/v1_artifact_hashes.json")
-    for filename, digest in original.items():
-        assert hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest, filename
+    verify_files(original)
     hourly = data_diagnostics(data)
     final_diagnostics()
     summary = dict(
@@ -397,6 +396,7 @@ def main():
         lock_hashes_verified=len(lock["hashes"]),
         test_reselected=False,
         original_artifact_hashes_verified=len(original),
+        full_h1_review=review(write=False),
         limitations=[
             "Same supplier cross-frequency validation; no independent price feed.",
             "Diagnostic analysis after test; not new independent evidence.",

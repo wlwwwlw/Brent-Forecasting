@@ -7,6 +7,7 @@ import math
 from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
+from prepare_data import review
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data/raw/brent_d1_bid_2025-10-28_2026-10-28.csv"
@@ -57,7 +58,7 @@ def main():
     if digest != metadata["sha256"]:
         raise ValueError("Raw file checksum changed")
     report = {
-        "status": "structural_checks_passed_external_calendar_review_pending",
+        "status": "passed",
         "raw_rows": len(rows),
         "active_rows": len(active),
         "excluded_flat_zero_volume": len(excluded),
@@ -78,12 +79,13 @@ def main():
         "nonfinite_values": 0,
         "raw_sha256": digest,
         "limitations": [
-            "Historical Brent-specific calendar and adjustment amounts not independently verified.",
+            "D1 and full H1 archive are from the same supplier, not independent price feeds.",
             "No interpolation, clipping, smoothing or outlier removal.",
             "Volume is provider-specific; not verified exchange volume.",
-            "Active observations are provisional trading sessions.",
+            "Historical CFD adjustment amounts were not reconstructed.",
         ],
     }
+    report["full_h1_review"] = review(write=False)
     write_csv(ROOT / "data/processed/brent_active_provisional.csv", active, FIELDS)
     write_csv(ROOT / "results/excluded_rows.csv", excluded, FIELDS + ["reason"])
     (ROOT / "results").mkdir(exist_ok=True)

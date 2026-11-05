@@ -2,7 +2,6 @@
 
 import csv
 import json
-from collections import Counter
 import matplotlib
 
 matplotlib.use("Agg")
@@ -101,59 +100,7 @@ def main():
                     )
                 )
     write_csv(out / "ml_runtime.csv", timings)
-    lines = [
-        "# ML: результаты только валидации",
-        "",
-        "15 конфигураций пяти методов. Лучшие настройки выбраны на этих же 104 origin; это не независимое подтверждение их преимущества. Финальный тест не рассчитывался.",
-        "",
-        "| Горизонт | Метод | Конфигурация | MAE | RMSE | sMAPE, % | Направление, % | Выигрыш RMSE к naive, % |",
-        "|---|---|---|---:|---:|---:|---:|---:|",
-    ]
-    for r in table:
-        lines.append(
-            f"| {r['horizon']} | {r['method']} | {r['candidate']} | {r['MAE']:.4f} | {r['RMSE']:.4f} | {r['sMAPE_pct']:.3f} | {r['direction_accuracy_pct']:.2f} | {r['RMSE_gain_vs_naive_pct']:.3f} |"
-        )
-    lines += [
-        "",
-        "## Победители ML по временным блокам",
-        "",
-        "| Горизонт | Кандидат | Блок | RMSE naive | RMSE ML | Выигрыш, % |",
-        "|---|---|---|---:|---:|---:|",
-    ]
-    for h, c in run["winners"].items():
-        for fold in ["v1", "v2", "v3"]:
-            n = next(
-                r
-                for r in base
-                if r["candidate"] == "naive" and r["horizon"] == h and r["fold"] == fold
-            )
-            m = next(
-                r for r in ml if r["candidate"] == c and r["horizon"] == h and r["fold"] == fold
-            )
-            lines.append(
-                f"| {h} | {c} | {fold} | {float(n['RMSE']):.4f} | {float(m['RMSE']):.4f} | {100 * (1 - float(m['RMSE']) / float(n['RMSE'])):.3f} |"
-            )
-    lines += [
-        "",
-        "## Как трактовать",
-        "",
-        "- Положительный выигрыш означает меньший RMSE. Победитель внутри ML не обязан превосходить naive.",
-        "- Для утверждения об устойчивом улучшении нужно учитывать все блоки, другие метрики и независимый финальный тест. Пока результат является отборочным.",
-        "- Одного seed недостаточно для вывода об устойчивости случайного леса. Дополнительные seeds выбранных случайных моделей следует проверять без повторного выбора удачного seed.",
-        "- Модели обучаются на изменении цены, а ошибки измеряются после восстановления уровня. Прямой и рекурсивный способы прогноза различаются, поэтому нельзя приписывать весь эффект только названию алгоритма.",
-        "- Нулевая направленная точность naive означает отсутствие направленного сигнала при ненулевых фактических изменениях, а не случайное угадывание с нулевой вероятностью успеха.",
-        "",
-        "## Выполнение",
-        "",
-        f"Обучений: {run['successful_fits']}; ошибок: {run['failures']}. Полный запуск: {run['elapsed_seconds']:.2f} сек.; общая подготовка признаков: {run['feature_preparation_seconds']:.2f} сек. Время зависит от компьютера и нагрузки. Затраты двух горизонтов у ML суммируются, поскольку модели обучаются отдельно.",
-        "",
-        f"Размеры обучающих выборок: от {min(x['training_n'] for x in fits)} до {max(x['training_n'] for x in fits)}. Каждый обучающий target имеет индекс не больше origin.",
-        "",
-    ]
-    warnings = Counter(w for x in fits for w in x["warnings"])
-    lines.append("Предупреждения: " + (str(dict(warnings)) if warnings else "нет."))
-    (ROOT / "docs/ml_results.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("Saved ML report, tables and figure.")
+    print("Saved ML tables and figure.")
 
 
 if __name__ == "__main__":

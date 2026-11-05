@@ -12,6 +12,12 @@ def digest(path):
 
 
 def main():
+    lock_path = ROOT / "config/final_lock.json"
+    if lock_path.exists():
+        print("Existing final lock retained.")
+        return
+    if (ROOT / "results/test/predictions.csv").exists():
+        raise RuntimeError("Cannot create a pre-test lock after evaluating the test")
     out = ROOT / "results/validation"
     families = {
         "simple": "simple_winners.json",
@@ -44,45 +50,9 @@ def main():
                     )
                 )
     write_csv(out / "finalist_stability.csv", stability)
-    lines = [
-        "# Устойчивость выбранных моделей на валидации",
-        "",
-        "Модели выбраны по всей валидации; блоки ниже — диагностика, а не независимый тест.",
-        "",
-        "| Горизонт | Модель | RMSE v1 | RMSE v2 | RMSE v3 | Побед над naive |",
-        "|---|---|---:|---:|---:|---:|",
-    ]
-    for h in [1, 5]:
-        for family in families:
-            selected = [
-                r
-                for r in stability
-                if r["horizon"] == h and r["family"] == family and r["fold"] != "all"
-            ]
-            selected.sort(key=lambda r: r["fold"])
-            base = {
-                r["fold"]: r["RMSE"]
-                for r in stability
-                if r["horizon"] == h and r["family"] == "simple"
-            }
-            wins = sum(r["RMSE"] < base[r["fold"]] for r in selected)
-            lines.append(
-                f"| {h} | {winners[family][str(h)]} | "
-                + " | ".join(f"{r['RMSE']:.4f}" for r in selected)
-                + f" | {wins}/3 |"
-            )
-    lines += [
-        "",
-        "Для нейросетей приведены средние метрики трёх seed, а не прогноз ансамбля.",
-        "Разброс по seed сохранён в neural_metrics.csv. Три seed не дают надёжной оценки всей случайности обучения.",
-        "Проверка блоков не меняет уже установленное правило выбора по общему RMSE.",
-        "Отдельный повторный перебор seed леса/бустинга не выполнен; победитель ML ElasticNet детерминирован при фиксированных данных.",
-        "Устойчивость к другим годам, поставщикам, представлениям признаков и сеткам параметров не установлена.",
-    ]
-    (ROOT / "docs/validation_stability.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     lock_path = ROOT / "config/final_lock.json"
     if lock_path.exists():
-        print("Existing final lock retained; stability report refreshed.")
+        print("Existing final lock retained.")
         return
     if (ROOT / "results/test/predictions.csv").exists():
         raise RuntimeError("Cannot claim pre-test lock after test predictions exist")
@@ -126,7 +96,8 @@ def main():
         inference="exploratory pointwise intervals; short dependent sample, possible nonstationarity and multiple comparisons limit claims; no tuning after test",
         hashes={str(p.relative_to(ROOT)).replace("\\", "/"): digest(p) for p in paths},
     )
-    lock_path.write_text(json.dumps(lock, indent=2), encoding="utf-8")
+    with lock_path.open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(lock, indent=2))
     print(json.dumps(lock, indent=2))
 
 
