@@ -103,17 +103,25 @@ def main():
     for ax, h in zip(axes, [1, 5]):
         sub = primary[primary.horizon == h].sort_values("RMSE")
         ax.barh(
-            sub.candidate,
+            sub.candidate.map(
+                {
+                    "naive": "Naive",
+                    "ses": "SES",
+                    "elastic_1.0": "ElasticNet",
+                    "lstm_8": "LSTM",
+                    "rnn_8": "RNN",
+                }
+            ),
             sub.RMSE,
             color=["#5c708a" if x == "naive" else "#8564ab" for x in sub.candidate],
         )
         ax.invert_yaxis()
-        ax.set_title(f"Horizon {h} trading day(s)")
-        ax.set_xlabel("Test RMSE, USD/barrel")
+        ax.set_title("На одну торговую сессию" if h == 1 else "На пять торговых сессий")
+        ax.set_xlabel("RMSE на тесте, USD/баррель")
         ax.set_xlim(0, sub.RMSE.max() * 1.2)
         for i, v in enumerate(sub.RMSE):
             ax.text(v + 0.02, i, f"{v:.3f}", va="center")
-    fig.suptitle("Locked finalists: 46 test origins; neural reference seed 42")
+    fig.suptitle("Тест: 46 дат прогноза; нейросети с seed=42")
     fig.tight_layout()
     fig.savefig(ROOT / "results/figures/final_test_rmse.png", dpi=170)
     plt.close(fig)

@@ -206,28 +206,28 @@ def data_diagnostics(data):
         data.date.iloc[207],
         alpha=0.14,
         color="#d5a24a",
-        label="Validation targets available by first test origin",
+        label="Выбор моделей",
     )
     axes[0].axvspan(
         data.date.iloc[208],
         data.date.iloc[-1],
         alpha=0.14,
         color="#8864af",
-        label="Reserved test price interval",
+        label="Тестовые цели",
     )
-    axes[0].set_ylabel("Close, USD/barrel")
+    axes[0].set_ylabel("Цена, USD/баррель")
     axes[0].legend(fontsize=8, loc="upper left")
-    axes[0].set_title("BRENT.CMD/USD bid: observed close and simple returns")
+    axes[0].set_title("Brent: цена закрытия и её изменение")
     axes[1].bar(data.date, 100 * data["return"], color="#318b80", width=1)
-    axes[1].set_ylabel("Close return, %")
+    axes[1].set_ylabel("Изменение цены, %")
     save(fig, "market_and_returns.png")
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
     axes[0].hist(data.close, bins=20, color="#65788c")
-    axes[0].set_xlabel("Close, USD/barrel")
+    axes[0].set_xlabel("Цена, USD/баррель")
     axes[1].hist(100 * data["return"].dropna(), bins=25, color="#318b80")
-    axes[1].set_xlabel("Close return, %")
+    axes[1].set_xlabel("Изменение цены, %")
     for ax in axes:
-        ax.set_ylabel("Sessions")
+        ax.set_ylabel("Сессии")
     save(fig, "data_distributions.png")
     return checks
 
@@ -305,7 +305,7 @@ def final_diagnostics():
         sub = df[df.horizon == h]
         truth = sub[sub.candidate == "naive"].sort_values("target_date")
         ax.plot(
-            pd.to_datetime(truth.target_date), truth.actual, color="#182c40", lw=2, label="Actual"
+            pd.to_datetime(truth.target_date), truth.actual, color="#182c40", lw=2, label="Факт"
         )
         for cid, g in sub.groupby("candidate"):
             g = g.sort_values("target_date")
@@ -317,8 +317,8 @@ def final_diagnostics():
                 color=COLORS[cid],
                 label=NAMES[cid],
             )
-        ax.set_title(f"h={h}: forecasts aligned to target dates, reference seed 42")
-        ax.set_ylabel("USD/barrel")
+        ax.set_title(f"Горизонт {h}: факт и прогноз по датам цели (seed=42)")
+        ax.set_ylabel("USD/баррель")
         ax.legend(ncol=5, fontsize=8)
     save(fig, "test_forecasts.png")
     fig, axes = plt.subplots(2, 2, figsize=(12, 7))
@@ -329,15 +329,15 @@ def final_diagnostics():
                 g.error, bins=12, histtype="step", lw=1.5, color=COLORS[cid], label=NAMES[cid]
             )
         axes[row, 0].axvline(0, color="black", lw=0.5)
-        axes[row, 0].set_xlabel("Prediction minus actual, USD/barrel")
-        axes[row, 0].set_title(f"h={h}: signed errors")
+        axes[row, 0].set_xlabel("Прогноз минус факт, USD/баррель")
+        axes[row, 0].set_title(f"Горизонт {h}: ошибки со знаком")
         axes[row, 0].legend(fontsize=8)
         groups = list(sub.groupby("candidate"))
         axes[row, 1].boxplot(
             [g.abs_error for _, g in groups], tick_labels=[NAMES[c] for c, _ in groups]
         )
-        axes[row, 1].set_title(f"h={h}: absolute errors")
-        axes[row, 1].set_ylabel("USD/barrel")
+        axes[row, 1].set_title(f"Горизонт {h}: абсолютные ошибки")
+        axes[row, 1].set_ylabel("USD/баррель")
     save(fig, "test_error_distributions.png")
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
     for ax, h in zip(axes, [1, 5]):
@@ -350,9 +350,9 @@ def final_diagnostics():
                 label=NAMES[cid],
                 color=COLORS[cid],
             )
-        ax.set_xlabel("Absolute realized price change")
-        ax.set_ylabel("Absolute forecast error")
-        ax.set_title(f"h={h}, USD/barrel")
+        ax.set_xlabel("Абсолютное изменение цены")
+        ax.set_ylabel("Абсолютная ошибка прогноза")
+        ax.set_title(f"Горизонт {h}, USD/баррель")
         ax.legend(fontsize=8)
     save(fig, "errors_vs_price_changes.png")
     fig, axes = plt.subplots(1, 2, figsize=(11, 4))
@@ -369,9 +369,9 @@ def final_diagnostics():
                 fontsize=8,
             )
         ax.set_xscale("log")
-        ax.set_xlabel("Median fit + feature preparation + forecast, ms (log)")
-        ax.set_ylabel("Test RMSE")
-        ax.set_title(f"h={h}: same CPU, seed 42")
+        ax.set_xlabel("Подготовка, обучение и прогноз: медиана, мс (лог. шкала)")
+        ax.set_ylabel("RMSE на тесте")
+        ax.set_title(f"Горизонт {h}: одна машина, seed=42")
     save(fig, "quality_vs_cost.png")
 
 
