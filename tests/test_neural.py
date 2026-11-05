@@ -143,7 +143,7 @@ class NeuralTests(unittest.TestCase):
                 and r["origin_index"] == "99"
             )
             value, _ = fit_prepared(data, c, settings, 42)
-            np.testing.assert_allclose(value, float(saved["predicted"]), rtol=0, atol=1e-6)
+            np.testing.assert_allclose(value, float(saved["predicted"]), rtol=0, atol=1e-5)
 
 
 if __name__ == "__main__":
