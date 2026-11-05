@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "frozen_before_first_run": true,
+  "candidates": [
+    {
+      "id": "ar_1",
+      "method": "ar",
+      "lags": 1
+    },
+    {
+      "id": "ar_5",
+      "method": "ar",
+      "lags": 5
+    },
+    {
+      "id": "ar_10",
+      "method": "ar",
+      "lags": 10
+    },
+    {
+      "id": "arima_110_n",
+      "method": "arima",
+      "order": [
+        1,
+        1,
+        0
+      ],
+      "trend": "n"
+    },
+    {
+      "id": "arima_110_t",
+      "method": "arima",
+      "order": [
+        1,
+        1,
+        0
+      ],
+      "trend": "t"
+    },
+    {
+      "id": "arima_011_n",
+      "method": "arima",
+      "order": [
+        0,
+        1,
+        1
+      ],
+      "trend": "n"
+    },
+    {
+      "id": "arima_011_t",
+      "method": "arima",
+      "order": [
+        0,
+        1,
+        1
+      ],
+      "trend": "t"
+    },
+    {
+      "id": "arima_111_n",
+      "method": "arima",
+      "order": [
+        1,
+        1,
+        1
+      ],
+      "trend": "n"
+    },
+    {
+      "id": "arima_111_t",
+      "method": "arima",
+      "order": [
+        1,
+        1,
+        1
+      ],
+      "trend": "t"
+    },
+    {
+      "id": "ses",
+      "method": "ses"
+    },
+    {
+      "id": "holt",
+      "method": "holt"
+    },
+    {
+      "id": "holt_damped",
+      "method": "holt_damped"
+    }
+  ],
+  "refit": "every origin, expanding history",
+  "forecast": "one fit, recursive forecasts through horizon 5; no future actuals",
+  "normalization": "divide by first available price, invert before metrics",
+  "arima_solver": "lbfgs maxiter=200; if convergence failure retry powell maxiter=1000",
+  "on_failure": "record error and exclude candidate from winner selection; never silently drop origins",
+  "smoothing": "estimated initialization, estimate parameters by training SSE, L-BFGS-B, use_brute=True",
+  "primary_metric": "RMSE",
+  "test_evaluated": false
+}

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "frozen_before_first_run": true,
+  "features": "close-only; 14 deterministic causal features; 20 changes require 21 prices",
+  "target": "close[t+h]-close[t] in USD per barrel; direct separate models for horizons 1 and 5",
+  "preprocessing": "StandardScaler for X in Pipeline and y in TransformedTargetRegressor, fit on eligible training examples only",
+  "refit": "every origin expanding window",
+  "seed": 42,
+  "workers": 1,
+  "early_stopping": false,
+  "on_failure": "record error; exclude incomplete candidate per horizon",
+  "candidates": [
+    {
+      "id": "ridge_1.0",
+      "method": "ridge",
+      "alpha": 1.0
+    },
+    {
+      "id": "ridge_10.0",
+      "method": "ridge",
+      "alpha": 10.0
+    },
+    {
+      "id": "ridge_100.0",
+      "method": "ridge",
+      "alpha": 100.0
+    },
+    {
+      "id": "elastic_0.01",
+      "method": "elastic",
+      "alpha": 0.01,
+      "l1_ratio": 0.5
+    },
+    {
+      "id": "elastic_0.1",
+      "method": "elastic",
+      "alpha": 0.1,
+      "l1_ratio": 0.5
+    },
+    {
+      "id": "elastic_1.0",
+      "method": "elastic",
+      "alpha": 1.0,
+      "l1_ratio": 0.5
+    },
+    {
+      "id": "forest_2",
+      "method": "forest",
+      "max_depth": 2,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "forest_4",
+      "method": "forest",
+      "max_depth": 4,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "forest_None",
+      "method": "forest",
+      "max_depth": null,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "boost_1_0.03",
+      "method": "boost",
+      "max_depth": 1,
+      "learning_rate": 0.03,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "boost_2_0.03",
+      "method": "boost",
+      "max_depth": 2,
+      "learning_rate": 0.03,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "boost_2_0.1",
+      "method": "boost",
+      "max_depth": 2,
+      "learning_rate": 0.1,
+      "min_samples_leaf": 5,
+      "n_estimators": 100
+    },
+    {
+      "id": "svr_0.1",
+      "method": "svr",
+      "C": 0.1,
+      "epsilon": 0.1
+    },
+    {
+      "id": "svr_1.0",
+      "method": "svr",
+      "C": 1.0,
+      "epsilon": 0.1
+    },
+    {
+      "id": "svr_10.0",
+      "method": "svr",
+      "C": 10.0,
+      "epsilon": 0.1
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "validation_only",
+  "primary_metric": "RMSE",
+  "winners": {
+    "1": "naive",
+    "5": "naive"
+  },
+  "naive_always_retained": true
+}

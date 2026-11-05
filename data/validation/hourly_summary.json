@@ -1,0 +1,88 @@
+[
+  {
+    "date": "2025-12-24",
+    "total_hours": 24,
+    "active_hours": 18,
+    "first_hour_utc": "2025-12-24T01:00:00.000Z",
+    "last_hour_utc": "2025-12-24T18:00:00.000Z",
+    "open": 61.922,
+    "high": 62.195,
+    "low": 61.535,
+    "close": 61.805
+  },
+  {
+    "date": "2025-12-25",
+    "total_hours": 24,
+    "active_hours": 0
+  },
+  {
+    "date": "2025-12-26",
+    "total_hours": 24,
+    "active_hours": 21,
+    "first_hour_utc": "2025-12-26T01:00:00.000Z",
+    "last_hour_utc": "2025-12-26T21:00:00.000Z",
+    "open": 61.847,
+    "high": 62.235,
+    "low": 60.132,
+    "close": 60.422
+  },
+  {
+    "date": "2025-12-31",
+    "total_hours": 20,
+    "active_hours": 19,
+    "first_hour_utc": "2025-12-31T01:00:00.000Z",
+    "last_hour_utc": "2025-12-31T19:00:00.000Z",
+    "open": 61.297,
+    "high": 61.905,
+    "low": 60.802,
+    "close": 60.842
+  },
+  {
+    "date": "2026-01-01",
+    "total_hours": 24,
+    "active_hours": 0
+  },
+  {
+    "date": "2026-01-02",
+    "total_hours": 24,
+    "active_hours": 21,
+    "first_hour_utc": "2026-01-02T01:00:00.000Z",
+    "last_hour_utc": "2026-01-02T21:00:00.000Z",
+    "open": 60.865,
+    "high": 61.34,
+    "low": 59.985,
+    "close": 60.777
+  },
+  {
+    "date": "2026-04-02",
+    "total_hours": 24,
+    "active_hours": 21,
+    "first_hour_utc": "2026-04-02T00:00:00.000Z",
+    "last_hour_utc": "2026-04-02T20:00:00.000Z",
+    "open": 100.427,
+    "high": 109.69,
+    "low": 99.145,
+    "close": 109.022
+  },
+  {
+    "date": "2026-04-03",
+    "total_hours": 24,
+    "active_hours": 0
+  },
+  {
+    "date": "2026-04-04",
+    "total_hours": 24,
+    "active_hours": 0
+  },
+  {
+    "date": "2026-10-27",
+    "total_hours": 24,
+    "active_hours": 21,
+    "first_hour_utc": "2026-10-27T00:00:00.000Z",
+    "last_hour_utc": "2026-10-27T20:00:00.000Z",
+    "open": 115.347,
+    "high": 116.92,
+    "low": 113.335,
+    "close": 114.225
+  }
+]

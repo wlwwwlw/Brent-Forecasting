@@ -1,0 +1,80 @@
+{
+  "protocol_version": 1,
+  "status": "frozen_before_model_validation",
+  "n_active": 258,
+  "horizons": [
+    1,
+    5
+  ],
+  "primary_metric": "RMSE",
+  "tie_breakers": [
+    "MAE",
+    "candidate_id"
+  ],
+  "processed_sha256": "dd8949006bb4b6c7c6b5759ab9694a97f19aef4374745abb779a51409927eac8",
+  "validation_folds": [
+    {
+      "id": "v1",
+      "origin_start": 99,
+      "origin_end": 132
+    },
+    {
+      "id": "v2",
+      "origin_start": 133,
+      "origin_end": 166
+    },
+    {
+      "id": "v3",
+      "origin_start": 167,
+      "origin_end": 202
+    }
+  ],
+  "test_origin_start": 207,
+  "test_origin_end": 252,
+  "final_test_gate": "Do not evaluate until candidates, tuning and family winners are locked.",
+  "baseline_candidates": [
+    {
+      "id": "naive",
+      "model": "naive"
+    },
+    {
+      "id": "drift",
+      "model": "drift"
+    },
+    {
+      "id": "rolling_mean_5",
+      "model": "rolling_mean",
+      "window": 5
+    },
+    {
+      "id": "rolling_mean_10",
+      "model": "rolling_mean",
+      "window": 10
+    },
+    {
+      "id": "rolling_mean_20",
+      "model": "rolling_mean",
+      "window": 20
+    },
+    {
+      "id": "rolling_median_5",
+      "model": "rolling_median",
+      "window": 5
+    },
+    {
+      "id": "rolling_median_10",
+      "model": "rolling_median",
+      "window": 10
+    },
+    {
+      "id": "rolling_median_20",
+      "model": "rolling_median",
+      "window": 20
+    },
+    {
+      "id": "seasonal_naive_5",
+      "model": "seasonal_naive",
+      "window": 5
+    }
+  ]
+}

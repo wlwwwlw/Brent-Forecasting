@@ -1,0 +1,54 @@
+{
+  "scope": "validation_only",
+  "expected_origins": 104,
+  "successful_fits": 3120,
+  "failures": 0,
+  "winners": {
+    "1": "elastic_1.0",
+    "5": "elastic_1.0"
+  },
+  "method_winners": {
+    "1": {
+      "boost": "boost_1_0.03",
+      "elastic": "elastic_1.0",
+      "forest": "forest_2",
+      "ridge": "ridge_100.0",
+      "svr": "svr_0.1"
+    },
+    "5": {
+      "boost": "boost_1_0.03",
+      "elastic": "elastic_1.0",
+      "forest": "forest_2",
+      "ridge": "ridge_100.0",
+      "svr": "svr_0.1"
+    }
+  },
+  "elapsed_seconds": 73.34041409986094,
+  "feature_preparation_seconds": 1.1448047999292612,
+  "test_evaluated": false,
+  "grid_sha256": "0d3f8c39626d958a2fef31502da97283de0b51b0dd6c18d62800bc02c9ea2109",
+  "data_sha256": "dd8949006bb4b6c7c6b5759ab9694a97f19aef4374745abb779a51409927eac8",
+  "feature_names": [
+    "return_lag_1",
+    "return_lag_2",
+    "return_lag_3",
+    "return_lag_5",
+    "return_lag_10",
+    "momentum_5",
+    "momentum_10",
+    "momentum_20",
+    "volatility_5",
+    "volatility_10",
+    "volatility_20",
+    "price_to_mean_5",
+    "price_to_mean_10",
+    "price_to_mean_20"
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "libraries": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  }
+}

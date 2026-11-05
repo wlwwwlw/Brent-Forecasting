@@ -1,0 +1,44 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "libraries": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "torch": "2.15.0+cpu"
+  },
+  "independent_retraining": {
+    "results/test/predictions.csv": {
+      "rows": 552,
+      "max_absolute_prediction_difference": 0.0,
+      "tolerance_USD": 1e-06
+    },
+    "results/validation/baseline_predictions.csv": {
+      "rows": 1872,
+      "max_absolute_prediction_difference": 0.0,
+      "tolerance_USD": 1e-06
+    },
+    "results/validation/statistical_predictions.csv": {
+      "rows": 2496,
+      "max_absolute_prediction_difference": 0.0,
+      "tolerance_USD": 1e-06
+    },
+    "results/validation/ml_predictions.csv": {
+      "rows": 3120,
+      "max_absolute_prediction_difference": 0.0,
+      "tolerance_USD": 1e-06
+    },
+    "results/validation/neural_predictions.csv": {
+      "rows": 3120,
+      "max_absolute_prediction_difference": 0.0,
+      "tolerance_USD": 1e-06
+    }
+  },
+  "unit_tests": {
+    "exit_code": 0,
+    "output": "----------------------------------------------------------------------\nRan 40 tests in 1.826s\n\nOK\n"
+  },
+  "status": "passed",
+  "raw_sha256": "b669cd512bda5624f530070cc9ec66064bc1c161045a48b56c437eb001693eee"
+}

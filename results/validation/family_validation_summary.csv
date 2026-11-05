@@ -1,0 +1,9 @@
+horizon,family,candidate,RMSE,MAE,aggregation
+1,Naive,naive,3.892102021302984,2.9947211538461547,one deterministic/fixed-seed run
+1,Statistical,ses,3.9180474124363207,3.0390491446802157,one deterministic/fixed-seed run
+1,ML,elastic_1.0,3.9409995933667563,3.0187711539400146,one deterministic/fixed-seed run
+1,Neural,lstm_8,4.043608209207175,3.0694777942542784,mean of three seed-specific metrics
+5,Naive,naive,7.367964147108544,6.3100576923076925,one deterministic/fixed-seed run
+5,Statistical,ses,7.350471577675652,6.316998571195908,one deterministic/fixed-seed run
+5,ML,elastic_1.0,7.921290706198253,6.686417586867134,one deterministic/fixed-seed run
+5,Neural,rnn_8,8.110537996787263,6.743072221856284,mean of three seed-specific metrics

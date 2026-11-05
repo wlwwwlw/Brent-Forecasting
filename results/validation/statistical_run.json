@@ -1,0 +1,39 @@
+{
+  "scope": "validation_only",
+  "expected_origins": 104,
+  "successful_fits": 1248,
+  "failures": 0,
+  "winners": {
+    "1": "ses",
+    "5": "ses"
+  },
+  "method_winners": {
+    "1": {
+      "ar": "ar_1",
+      "arima": "arima_011_n",
+      "holt": "holt",
+      "holt_damped": "holt_damped",
+      "ses": "ses"
+    },
+    "5": {
+      "ar": "ar_1",
+      "arima": "arima_110_n",
+      "holt": "holt",
+      "holt_damped": "holt_damped",
+      "ses": "ses"
+    }
+  },
+  "excluded_incomplete_candidates": [],
+  "elapsed_seconds": 19.845319500193,
+  "test_evaluated": false,
+  "grid_sha256": "5babd98ad671039f40151a0b8dd08f1445b8746f126ccd5eae92c2a0b3ca586f",
+  "data_sha256": "dd8949006bb4b6c7c6b5759ab9694a97f19aef4374745abb779a51409927eac8",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "libraries": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  }
+}

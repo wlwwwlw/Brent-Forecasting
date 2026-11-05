@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "frozen_before_first_run": true,
+  "candidates": [
+    {
+      "id": "mlp_8",
+      "architecture": "mlp",
+      "hidden_size": 8
+    },
+    {
+      "id": "rnn_8",
+      "architecture": "rnn",
+      "hidden_size": 8
+    },
+    {
+      "id": "lstm_8",
+      "architecture": "lstm",
+      "hidden_size": 8
+    },
+    {
+      "id": "gru_8",
+      "architecture": "gru",
+      "hidden_size": 8
+    },
+    {
+      "id": "cnn_8",
+      "architecture": "cnn",
+      "hidden_size": 8
+    }
+  ],
+  "seeds": [
+    7,
+    42,
+    2026
+  ],
+  "epochs": 60,
+  "learning_rate": 0.003,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "lookback": 20,
+  "batch": "full training set",
+  "threads": 1,
+  "device": "cpu",
+  "dtype": "float32",
+  "deterministic": true,
+  "early_stopping": false,
+  "input": "last 20 simple close returns, oldest to newest; same input to all architectures",
+  "normalization": "single mean/std over training windows only; y mean/std over eligible known training targets; population std",
+  "output": "direct dollar change for separate h=1 and h=5 models; add last close",
+  "selection": "mean of 3 seed-specific validation RMSEs, then mean MAE, then id; never pick best seed",
+  "final_reference_seed": 42,
+  "refit": "new model on each origin; expanding eligible training set",
+  "failure_policy": "record failed fit; candidate/horizon excluded unless all origins and seeds completed",
+  "test_evaluated": false
+}

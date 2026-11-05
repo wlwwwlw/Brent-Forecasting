@@ -1,0 +1,72 @@
+{
+  "locked_at_utc": "2026-11-04T05:34:31.267750+00:00",
+  "status": "locked_before_final_evaluation",
+  "winners": {
+    "simple": {
+      "1": "naive",
+      "5": "naive"
+    },
+    "statistical": {
+      "1": "ses",
+      "5": "ses"
+    },
+    "ml": {
+      "1": "elastic_1.0",
+      "5": "elastic_1.0"
+    },
+    "neural": {
+      "1": "lstm_8",
+      "5": "rnn_8"
+    }
+  },
+  "primary_metric": "RMSE",
+  "neural_reference_seed": 42,
+  "neural_seeds": [
+    7,
+    42,
+    2026
+  ],
+  "neural_reporting": "primary fixed seed 42; all seed metrics and their mean separately; no ensemble",
+  "refit": "expanding history each origin; only labels available at that origin",
+  "test_blocks": [
+    [
+      207,
+      229
+    ],
+    [
+      230,
+      252
+    ]
+  ],
+  "bootstrap": {
+    "method": "paired circular block percentile bootstrap of saved errors",
+    "block_lengths": [
+      5,
+      10
+    ],
+    "primary_block_length": 5,
+    "replicates": 10000,
+    "seed": 20261104,
+    "confidence": 0.95,
+    "simultaneous": false,
+    "comparisons": "each non-naive finalist versus naive, fixed seed 42"
+  },
+  "inference": "exploratory pointwise intervals; short dependent sample, possible nonstationarity and multiple comparisons limit claims; no tuning after test",
+  "hashes": {
+    "config/experiment.json": "2a6f67e8c06193ca3f13d6c2e980c7e98e5b48c8c0e830b7839667970433e407",
+    "config/statistical.json": "5babd98ad671039f40151a0b8dd08f1445b8746f126ccd5eae92c2a0b3ca586f",
+    "config/ml.json": "0d3f8c39626d958a2fef31502da97283de0b51b0dd6c18d62800bc02c9ea2109",
+    "config/neural.json": "0c96fa9657ccde2761e521a54efe22d196582f5b8a786dc548e5306b259ed309",
+    "src/experiment.py": "b1839568042f13f72418258577507ec6499f14874a525c58f33eef550104a1d9",
+    "src/statistical_models.py": "5c4ae7542690967446ebacf6f42e50c2df6a6ec96cf108eabc40ae8e5e0a8167",
+    "src/ml_models.py": "a97f34dd7f7a059d6edaa8c9852196d7d57823ed28e02647065b6e28bf6449e9",
+    "src/neural_models.py": "9d8189bf03e3207fc8a9f6d57d38904cca65dc42dbd27750665bd9e80baa3fdc",
+    "src/run_final.py": "7788e2e00989fd7eaf7a59a95cd6507887948c9d36255f05c4ba731c587667a4",
+    "src/report_final.py": "5e682073dcc39de6aeb44f67b47f0f41dac827600aba7460bf1081805239e6e9",
+    "data/processed/brent_active_provisional.csv": "dd8949006bb4b6c7c6b5759ab9694a97f19aef4374745abb779a51409927eac8",
+    "results/validation/simple_winners.json": "68d5a08a60b1979823d54a7c46b4ccb0567daf47178e48d63ef1afcb9c908434",
+    "results/validation/statistical_run.json": "eecc07fe8b4e535fe44669a5c59400a1d4ea86d7968edbe7bc2c7cc09430c02c",
+    "results/validation/ml_run.json": "40711d67973d6d1dcbf120f084098d5851f005b190aba9c693780ca11745bd20",
+    "results/validation/neural_run.json": "e73632414124be75491d3a43743006cd1d9c427169637123a606db8c2180ec85"
+  }
+}

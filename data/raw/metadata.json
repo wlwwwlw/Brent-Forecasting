@@ -1,0 +1,45 @@
+{
+  "status": "raw_unvalidated",
+  "source": "https://www.dukascopy-node.app/instrument/brentcmdusd",
+  "downloader": "dukascopy-node@1.51.1",
+  "retrieved_at_utc": "2026-11-04T04:30:12.216Z",
+  "config": {
+    "instrument": "brentcmdusd",
+    "dates": {
+      "from": "2025-10-28T00:00:00.000Z",
+      "to": "2026-10-28T00:00:00.000Z"
+    },
+    "timeframe": "d1",
+    "priceType": "bid",
+    "format": "json",
+    "ignoreFlats": false,
+    "volumes": true,
+    "retryCount": 2,
+    "failAfterRetryCount": true,
+    "utcOffset": 0,
+    "volumeUnits": "millions",
+    "batchSize": 10,
+    "pauseBetweenBatchesMs": 1000,
+    "requestIntervalMs": 0,
+    "rateLimitRetryCount": 3,
+    "useCache": false,
+    "cacheFolderPath": "",
+    "retryOnEmpty": false,
+    "pauseBetweenRetriesMs": 500,
+    "wafMode": "auto",
+    "chromePath": "",
+    "wafTimeoutMs": 60000,
+    "wafTokenCache": true,
+    "wafTokenCachePath": ""
+  },
+  "rows": 365,
+  "first": "2025-10-28T00:00:00.000Z",
+  "last": "2026-10-27T00:00:00.000Z",
+  "sha256": "b669cd512bda5624f530070cc9ec66064bc1c161045a48b56c437eb001693eee",
+  "zero_volume": 107,
+  "notes": [
+    "End date exclusive. Full UTC daily candles before assignment date.",
+    "No filtering or filling performed. Volume is provider data, not verified exchange traded volume.",
+    "Trading calendar, missing sessions and candle construction still require validation."
+  ]
+}

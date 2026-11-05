@@ -1,0 +1,31 @@
+{
+  "scope": "validation_only",
+  "winners": {
+    "1": "lstm_8",
+    "5": "rnn_8"
+  },
+  "selection": "mean of 3 seed-specific validation RMSEs, then mean MAE, then id; never pick best seed",
+  "successful_fits": 3120,
+  "failed_fits": 0,
+  "seeds": [
+    7,
+    42,
+    2026
+  ],
+  "expected_origins": 104,
+  "total_fit_seconds": 305.6507015998941,
+  "current_invocation_seconds": 305.8833876999561,
+  "current_feature_seconds": 0.03300240007229149,
+  "test_evaluated": false,
+  "fingerprint": {
+    "config": "0c96fa9657ccde2761e521a54efe22d196582f5b8a786dc548e5306b259ed309",
+    "data": "dd8949006bb4b6c7c6b5759ab9694a97f19aef4374745abb779a51409927eac8",
+    "split": "2a6f67e8c06193ca3f13d6c2e980c7e98e5b48c8c0e830b7839667970433e407",
+    "models_code": "9d8189bf03e3207fc8a9f6d57d38904cca65dc42dbd27750665bd9e80baa3fdc",
+    "runner_code": "f6107ebaf9312d7075ab432fac5367924423a23317e9aab79d53e36bed8057a8",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.5.4"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0"
+}

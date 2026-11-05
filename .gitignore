@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+.ruff_cache/
+data/recheck/
+*.zip
+.vscode/
+.pytest_cache/
+.env

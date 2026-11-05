@@ -1,0 +1,28 @@
+{
+  "status": "structural_checks_passed_external_calendar_review_pending",
+  "raw_rows": 365,
+  "active_rows": 258,
+  "excluded_flat_zero_volume": 107,
+  "excluded_weekdays": {
+    "Saturday": 52,
+    "Sunday": 52,
+    "Thursday": 2,
+    "Friday": 1
+  },
+  "excluded_monday_to_friday": [
+    "2025-12-25T00:00:00.000Z",
+    "2026-01-01T00:00:00.000Z",
+    "2026-04-03T00:00:00.000Z"
+  ],
+  "duplicates": 0,
+  "missing_calendar_dates": 0,
+  "invalid_ohlc": 0,
+  "nonfinite_values": 0,
+  "raw_sha256": "b669cd512bda5624f530070cc9ec66064bc1c161045a48b56c437eb001693eee",
+  "limitations": [
+    "Historical Brent-specific calendar and adjustment amounts not independently verified.",
+    "No interpolation, clipping, smoothing or outlier removal.",
+    "Volume is provider-specific; not verified exchange volume.",
+    "Active observations are provisional trading sessions."
+  ]
+}
