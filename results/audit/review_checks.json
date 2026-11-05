@@ -1,0 +1,55 @@
+{
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "libraries": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "torch": "2.15.0+cpu"
+  },
+  "hourly_review": {
+    "status": "passed",
+    "hourly_rows": 8580,
+    "active_hourly_rows": 5393,
+    "missing_calendar_hours": 180,
+    "missing_inside_observed_session": 0,
+    "daily_rows": 365,
+    "active_sessions": 258,
+    "inactive_dates": 107,
+    "shortened_sessions": 9,
+    "mismatched_dates": 0,
+    "max_absolute_OHLC_difference": 0.0,
+    "assignment_time": "2026-10-28T00:00:00+03:00",
+    "cutoff_utc": "2026-10-27T21:00:00+00:00",
+    "last_active_hour_end_utc": "2026-10-27T21:00:00+00:00",
+    "prices_formed_after_cutoff": 0,
+    "D1_is_primary": true,
+    "model_data_changed": false,
+    "limitation": "Same supplier. Missing hours outside the observed session are listed, not filled."
+  },
+  "recalculated_tables": {
+    "metrics.csv": {
+      "rows": 48,
+      "max_difference": 0.0,
+      "tolerance": 1e-10
+    },
+    "primary_metrics.csv": {
+      "rows": 8,
+      "max_difference": 0.0,
+      "tolerance": 1e-10
+    },
+    "paired_bootstrap.csv": {
+      "rows": 12,
+      "max_difference": 0.0,
+      "tolerance": 1e-10
+    }
+  },
+  "tests": {
+    "exit_code": 0,
+    "output": "Existing final lock retained.\n----------------------------------------------------------------------\nRan 50 tests in 1.905s\n\nOK\n"
+  },
+  "status": "passed",
+  "checked_commit": "e041a57",
+  "clean_clone_unchanged_after_check": true
+}
